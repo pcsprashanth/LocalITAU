@@ -1,0 +1,4 @@
+infra:
+  working-directory: 'infra'
+  terraform:
+    version:  "1.3.1"
