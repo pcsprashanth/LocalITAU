@@ -76,7 +76,7 @@ jobs:
           }
           EOF
           terraform init
-        working-directory: ${{ github.workspace }}/infra/ResourceGroup
+        working-directory: ${{ github.workspace }}/infra/ResourceGroup/
 
       - name: Terraform validate
         run: terraform validate
@@ -98,7 +98,7 @@ jobs:
           else
             exit 0
           fi
-        working-directory: ${{ github.workspace }}/infra/ResourceGroup
+        working-directory: ${{ github.workspace }}/infra/ResourceGroup//
 
       - name: Terraform Apply
         env:
@@ -106,7 +106,7 @@ jobs:
         id: tf-apply
         # if: github.ref == 'refs/heads/develop' && github.event_name == 'push'
         run: terraform apply -auto-approve tfplan
-        working-directory: ${{ github.workspace }}/infra/ResourceGroup
+        working-directory: ${{ github.workspace }}/infra/ResourceGroup/
 
 
       - name: Install Terrascan
