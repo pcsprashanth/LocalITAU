@@ -54,7 +54,7 @@ jobs:
             # Create Storage and container
             az storage account create --name rasheestorage96 --resource-group ITAUTEST --location brazilsouth --sku Standard_LRS --kind StorageV2 --encryption-services blob
             accountKey=$(az storage account keys list --account-name rasheestorage96 --resource-group ITAUTEST --output tsv --query "[0].value")
-            az storage container create --name test --account-name rasheestorage96 --account-key $accountKey
+            az storage container create --name container04 --account-name rasheestorage96 --account-key $accountKey
             # Enable storage versioning
             az storage account blob-service-properties update --account-name rasheestorage96 --resource-group ITAUtestrashee --enable-versioning true
             echo "::set-output name=accountKey::$accountKey"
@@ -70,7 +70,7 @@ jobs:
           terraform {
             backend "azurerm" {
               storage_account_name = "rasheestorage96"
-              container_name       = "test"
+              container_name       = "container04"
               key                  = "terraform.tfstate"
             }
           }
