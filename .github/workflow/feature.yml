@@ -2,7 +2,7 @@ name: Run Azure Login Workflow
 
 on: 
   push:
-    branches: [ main ]
+    branches: [ "main" ]
 
 permissions:
       id-token: write
