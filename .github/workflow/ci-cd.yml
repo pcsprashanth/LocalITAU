@@ -15,7 +15,7 @@ env:
   
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latestrashee
     steps:
 
       - name: Check Az version
@@ -32,7 +32,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      # Install the latest version of the Terraform CLI
+      # Install the latestrashee version of the Terraform CLI
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
@@ -50,13 +50,13 @@ jobs:
           tfstate_file=".terraform/terraform.tfstate"
           if [ ! -f "$tfstate_file" ]; then
             # Create RG
-            az group create --name ITAUTEST --location brazilsouth
+            az group create --name ITAUtestrashee --location brazilsouth
             # Create Storage and container
-            az storage account create --name rasheestorage96 --resource-group ITAUTEST --location brazilsouth --sku Standard_LRS --kind StorageV2 --encryption-services blob
-            accountKey=$(az storage account keys list --account-name rasheestorage96 --resource-group ITAUTEST --output tsv --query "[0].value")
-            az storage container create --name test --account-name rasheestorage96 --account-key $accountKey
+            az storage account create --name rasheestorage96 --resource-group ITAUtestrashee --location brazilsouth --sku Standard_LRS --kind StorageV2 --encryption-services blob
+            accountKey=$(az storage account keys list --account-name rasheestorage96 --resource-group ITAUtestrashee --output tsv --query "[0].value")
+            az storage container create --name testrashee --account-name rasheestorage96 --account-key $accountKey
             # Enable storage versioning
-            az storage account blob-service-properties update --account-name rasheestorage96 --resource-group ITAUTEST --enable-versioning true
+            az storage account blob-service-properties update --account-name rasheestorage96 --resource-group ITAUtestrashee --enable-versioning true
             echo "::set-output name=accountKey::$accountKey"
           fi
         shell: bash
@@ -70,7 +70,7 @@ jobs:
           terraform {
             backend "azurerm" {
               storage_account_name = "rasheestorage96"
-              container_name       = "test"
+              container_name       = "testrashee"
               key                  = "terraform.tfstate"
             }
           }
